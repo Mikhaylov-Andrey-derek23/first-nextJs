@@ -1,13 +1,18 @@
 import {useRouter} from 'next/router';
 import React, {useState, useEffect} from 'react';
 import Link from "next/link";
+import ErrorPage from '../404';
 
 import settings from '../../app/setings.json';
 import MainLayout from '../../components/MainLayout';
 
 export default function Post({serverPost}){
     const router = useRouter();
-
+    if(serverPost === undefined){
+        return(
+            <ErrorPage/>
+        )
+    }
     const [post, setPost] = useState(serverPost);
     useEffect(()=>{
         async function load(){
